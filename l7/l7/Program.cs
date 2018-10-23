@@ -51,27 +51,28 @@ namespace l7
     {
         private float emolument;  // เงินประจำตำแหน่ง //ไม่สามารถเข้าถึงได้
 
-        public Professor(string name, float billingRate) : base(name, billingRate) //เนื่องจากพ้องรูปกับคลาส Teaczer เพิ่ม(name, billingRate)เพื่อเก็บค่าลงฟิลด์
+        public Professor(string name, float billingRate) : base(name, billingRate) //เนื่องจากพ้องรูปกับคลาส Teacher เพิ่ม(name, billingRate)เพื่อเก็บค่าลงฟิลด์
         {
         }
 
-        public Professor(string name, float billingRate, float emolument)// : this(name, billingRate)
+        public Professor(string name, float billingRate, float emolument)// : this(name, billingRate)ใช้การทำงานจากคลาสแม่
         : this(name, billingRate)                                       
         {
-            this.emolument = emolument;          
+            this.emolument = emolument;   // เก็บค่า emolument = 5000 ลงในฟิลด์  private float emolument    
         }
 
         // new function, because it's different than the base version
-        public new float CalculateCharge(float hours)
+        public new float CalculateCharge(float hours) // สร้างวัตถุใหม่เพราะการทำงานไม่เหมือนกับคลาสแม่
         {
-            if (hours < 1.0F)
-                hours = 1.0F; // minimum charge.
-            return (hours * billingRate) + emolument;
+            if (hours < 1.0F) // ถ้า hours น้อยกว่า 1.0 
+                hours = 1.0F; // minimum charge. // hours = 1.0
+            return (hours * billingRate) + emolument;// hours = 12,billingRate = 500 , emolument = 5000 // (12*500)+5000 = 11000
+                                                       // ส่งค่า 11000 เมื่อเมธอดถูกเรียกใช้ //ค่าที่นำมาคำนวณได้จากพารามิเตอร์ที่กำหนดไว้ที่ Main
         }
         // new function, because it's different than the base version
-        public new string TypeName()
+        public new string TypeName()// สร้างวัตถุใหม่เพราะการทำงานไม่เหมือนกับคลาสแม่
         {
-            return ("Professor");
+            return ("Professor"); // ส่งค่าสตริง Professor เมื่อเมธอดถูกเรียกใช้
         }
     }
 
