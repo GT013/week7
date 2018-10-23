@@ -10,12 +10,18 @@ namespace l7
     {
         static void Main(string[] args)
         {
-            Teacher teacher = new Teacher("Tom", 350f); // ประกาศคลาส Teacher teacher = สร้างวัตถุใหม่เพื่อการส่งค่าพารามิเตอร์
-            // teacher work for 20Hr/month
+
+            Teacher teacher = new Teacher("Tom", 350f); // ประกาศคลาส Teacher teacher = สร้างวัตถุใหม่ส่งค่าพารามิเตอร์ Tom,350
+            Professor prof = new Professor("Jerry", 500f, 5000f); // ประกาศคลาส Professor prof = สร้างวัตถุใหม่ส่งค่าพารามิเตอร์ Jerry,500,5000
+                                                                  // teacher work 20Hr/month
             Console.WriteLine("{0} charge = {1}", teacher.TypeName(),
-                teacher.CalculateCharge(20f)); // เรียกใช้เมธอดจากคลาส Teacher มี .TypeName() และ 
-                                               // .CalculateCharge(20f)(กำหนดค่าพารามิเตอร์เท่ากับ 20) 
+                teacher.CalculateCharge(20f)); // เรียกใช้เมธอดจากคลาส Teacher .TypeName(),.CalculateCharge(20f)(ส่งค่าพารามิเตอร์เท่ากับ 20)
+                                               // professor work 12Hr/month
+            Console.WriteLine("{0} charge = {1}", prof.TypeName(),
+                    prof.CalculateCharge(12F));// เรียกใช้เมธอดจากคลาส Professor มี .TypeName(),.CalculateCharge(12F)(ส่งค่าพารามิเตอร์เท่ากับ 12)
             Console.ReadLine();
+
+
         }
     }
     class Teacher
@@ -39,6 +45,36 @@ namespace l7
         private string name; // ข้อมูล name จะไม่ถูกเข้าถึง
         protected float billingRate; // เมธอดลูกสามารถเข้าถึงได้
     }
+
+
+    class Professor : Teacher // คลาส Professor สืบทอดจาก Teacher
+    {
+        private float emolument;  // เงินประจำตำแหน่ง //ไม่สามารถเข้าถึงได้
+
+        public Professor(string name, float billingRate) : base(name, billingRate) //เนื่องจากพ้องรูปกับคลาส Teaczer เพิ่ม(name, billingRate)เพื่อเก็บค่าลงฟิลด์
+        {
+        }
+
+        public Professor(string name, float billingRate, float emolument)// : this(name, billingRate)
+        : this(name, billingRate)                                       
+        {
+            this.emolument = emolument;          
+        }
+
+        // new function, because it's different than the base version
+        public new float CalculateCharge(float hours)
+        {
+            if (hours < 1.0F)
+                hours = 1.0F; // minimum charge.
+            return (hours * billingRate) + emolument;
+        }
+        // new function, because it's different than the base version
+        public new string TypeName()
+        {
+            return ("Professor");
+        }
+    }
+
 
 
 }
