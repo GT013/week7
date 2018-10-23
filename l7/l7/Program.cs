@@ -10,57 +10,36 @@ namespace l7
     {
         static void Main(string[] args)
         {
-            Student su = new Student("Student Name","12345678");
-
-            try
-            {
-                
-                su.GPA = 4.0f;
-                Console.WriteLine("Student name : " + su.Name);
-                Console.WriteLine("Student ID   : " + su.ID);
-                Console.WriteLine("Student GPA  : " + su.GPA);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            Teacher teacher = new Teacher("Tom", 350f);
+            // teacher work for 20Hr/month
+            Console.WriteLine("{0} charge = {1}", teacher.TypeName(),
+                teacher.CalculateCharge(20f));
             Console.ReadLine();
-
         }
     }
-    class Student
+    class Teacher
     {
+        // constructor (for initial private/protected variables)
+        public Teacher(string name, float billingRate)
+        {
+            this.name = name;
+            this.billingRate = billingRate;
+        }
+        // figure out the charge based on teacher's rate
+        public float CalculateCharge(float hours)
+        {
+            return (hours * billingRate);
+        }
+        // return the name of this type
+        public string TypeName()
+        {
+            return ("Teacher");
+        }
         private string name;
-        private string id;
-        private float gpa;   
-        public Student(string Name, string ID)
-        {
-            this.name = Name;   // assign auto variable to the field
-            this.id = ID;
-        }
-        public string Name
-        {
-            get { return name; }
-        }
-        public string ID
-        {
-            get { return id; }
-        }
-
-        public float GPA
-        {
-            get
-            {
-                return gpa;
-            }
-            set
-            {
-                if (value > 0.0 && value <= 4.0)
-                    gpa = value;
-                else
-                    throw (new Exception("Error!!!! invalid GPA"));
-            }
-        }
+        protected float billingRate;
     }
+
 
 }
+
+
