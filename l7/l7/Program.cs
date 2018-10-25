@@ -10,16 +10,15 @@ namespace l7
     {
         static void Main(string[] args)
         {
-            Person p = new Person();
+            Person p = new Professor();
             p.SayHi();
-            Student s = new Student();
-            s.SayHi();
-            Person sp = new Student();
-            sp.SayHi();
-            Teacher t = new Teacher();
+
+            Student r = new Professor();
+            r.SayHi();
+
+            Teacher t = new Person();
             t.SayHi();
-            Person tp = new Teacher();
-            tp.SayHi();
+
             Console.ReadKey();
 
         }
@@ -42,10 +41,18 @@ namespace l7
 
     class Teacher : Person
     {
-        public new void SayHi()
+        public override void SayHi()
         {
             Console.WriteLine("Hi I'm a teacher");
         }
+    }
+    class Professor : Teacher
+    {
+        public new void SayHi()
+        {
+            Console.WriteLine("Hi Nantikan");
+        }
+           
     }
 }
 
